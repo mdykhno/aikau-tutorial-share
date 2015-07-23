@@ -1,0 +1,33 @@
+<alfresco-config>
+
+    <!-- Disable CSRF completely for now -->
+    <!-- It seems Share has issues on 4.2.x with the embedded tomcat and CSRFPolicy -->
+    <config evaluator="string-compare" condition="CSRFPolicy" replace="true">
+	<filter/>
+    </config>
+
+
+    <config evaluator="string-compare" condition="Remote">
+        <remote>
+            <endpoint>
+                <id>alfresco-noauth</id>
+                <name>Alfresco - unauthenticated access</name>
+                <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
+                <connector-id>alfresco</connector-id>
+                <endpoint-url>http://localhost:80/alfresco/s</endpoint-url>
+                <identity>none</identity>
+            </endpoint>
+
+            <endpoint>
+                <id>alfresco</id>
+                <name>Alfresco - user access</name>
+                <description>Access to Alfresco Repository WebScripts that require user authentication</description>
+                <connector-id>alfresco</connector-id>
+                <endpoint-url>http://localhost:80/alfresco/s</endpoint-url>
+                <identity>user</identity>
+            </endpoint>
+        </remote>
+    </config>
+    
+</alfresco-config>
+
